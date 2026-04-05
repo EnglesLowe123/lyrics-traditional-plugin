@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "歌词简繁转换",
+  "plugin_id": "lyrics-traditional-plugin",
+  "version": "1.0.0",
+  "minversion": "1.6.0",
+  "moekoe": true,
+  "author": {
+    "name": "MoeKoe Music",
+    "url": "https://music.moekoe.cn/"
+  },
+  "description": "在全屏歌词与桌面歌词窗口中，将歌词在简体中文与繁体中文（台湾用字）之间转换显示。",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "opencc-full.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "歌词简繁转换",
+    "default_icon": {
+      "16": "logo.png",
+      "48": "logo.png",
+      "128": "logo.png"
+    }
+  },
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  }
+}

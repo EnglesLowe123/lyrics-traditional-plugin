@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>歌词简繁转换</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --accent: #fa233b;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-strong: rgba(255, 255, 255, 0.96);
+      --line: rgba(17, 19, 26, 0.08);
+      --text: #11131a;
+      --subtle: rgba(17, 19, 26, 0.58);
+      --shadow: 0 18px 44px rgba(17, 19, 26, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      width: 360px;
+      min-height: 100vh;
+      padding: 16px;
+      font-family: "SF Pro Display", "PingFang SC", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 120, 142, 0.2), transparent 38%),
+        linear-gradient(180deg, #fdfdfe 0%, #f4f6fb 100%);
+    }
+
+    .panel {
+      padding: 16px;
+      border-radius: 24px;
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px) saturate(1.2);
+      -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .summary {
+      margin: 10px 0 0;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--subtle);
+    }
+
+    .section {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 18px;
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--subtle);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .option:last-child {
+      margin-bottom: 0;
+    }
+
+    .option input {
+      margin-top: 3px;
+      accent-color: var(--accent);
+    }
+
+    .option label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      cursor: pointer;
+      min-width: 0;
+    }
+
+    .option .title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .option .hint {
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--subtle);
+    }
+
+    .status {
+      min-height: 18px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--subtle);
+    }
+
+    .status.success {
+      color: #12824c;
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="eyebrow">歌词插件</div>
+    <h1>歌词简繁转换</h1>
+    <p class="summary">在全屏歌词与桌面歌词窗口中转换显示用字。源站多为简体歌词；若为繁体源，请选用「繁体 → 简体」。</p>
+
+    <section class="section">
+      <h2 class="section-title">模式</h2>
+
+      <div class="option">
+        <input type="radio" name="mode" id="modeOff" value="off">
+        <label for="modeOff">
+          <span class="title">关闭</span>
+          <span class="hint">不修改歌词显示。</span>
+        </label>
+      </div>
+
+      <div class="option">
+        <input type="radio" name="mode" id="modeS2t" value="s2t">
+        <label for="modeS2t">
+          <span class="title">简体 → 繁体（台湾）</span>
+          <span class="hint">使用 OpenCC 词组与字级规则转为繁体。</span>
+        </label>
+      </div>
+
+      <div class="option">
+        <input type="radio" name="mode" id="modeT2s" value="t2s">
+        <label for="modeT2s">
+          <span class="title">繁体 → 简体</span>
+          <span class="hint">适合繁体歌词想看成简体时使用。</span>
+        </label>
+      </div>
+    </section>
+
+    <div id="statusText" class="status"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
